@@ -17,7 +17,14 @@ class Products{
         try{
             const res = await fetch('products.json');
             const result = await res.json();
-            return result;
+            let products = result.items;
+            products = products.map(item=>{
+                const {title,price} = item.fields;
+                const {id} = item.sys;
+                const image = item.fields.image.fields.file.url;
+                return {title,price,id,image};
+            })
+            return products;
         } catch (error){
             console.log(error);
         }
@@ -37,6 +44,6 @@ document.addEventListener('DOMContentLoaded', ()=>{
     const products = new Products();
 
     // getting all products
-    products.getProducts().then(data=>console.log(data))
+    products.getProducts().then(products=>console.log(products));
     console.log('hey ahmed the code master welcome back we were waiting you long time man!')
 })
