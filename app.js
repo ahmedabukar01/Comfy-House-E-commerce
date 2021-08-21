@@ -12,6 +12,7 @@ const productsDOM = document.querySelector('.products-center');
 let cart = []
 
 // getting the products
+
 class Products{
    async getProducts(){
         try{
