@@ -55,6 +55,13 @@ class UI{
         });
         productsDOM.innerHTML +=result;
     }
+    getbugButtons(){
+        const buttons = [...document.querySelectorAll('.bag-btn')];
+        buttons.forEach(button=>{
+            let id = button.dataset.id;
+            console.log(id)
+        })
+    }
 }
 // local Storage
 class Storage{
@@ -71,6 +78,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
     products.getProducts().then(products=> {
         ui.displayProducts(products);
         Storage.saveProduct(products);
-    });
+    }).then(()=>{
+        ui.getbugButtons();
+    })
     console.log('hey ahmed the code master welcome back we were waiting you long time man!')
 })
