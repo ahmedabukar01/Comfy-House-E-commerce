@@ -81,6 +81,7 @@ class UI{
                     // set cart values 
                     this.saveCartValues(cart);
                     // display cart item
+                    this.addToCart(cartItem);
                     // show the cart
                     })
             
@@ -97,7 +98,28 @@ class UI{
       
       cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
       cartItems.innerText = itemsTotal;
-      console.log(cartTotal,cartItems);
+
+    }
+    
+    addToCart(cart){
+        const div = document.createElement('div');
+        div.innerHTML = `
+        <img src=${cart.image} alt="product">
+        <div>
+            <h4>${cart.title}</h4>
+            <h5>$ ${cart.price}</h5>
+            <span class="remove-item" data-id=${cart.id}>Remove</span>
+        </div>
+        <div>
+            <i class="fas fa-chevron-up" data-id=${cart.id}></i>
+            <p class="item-amount">${cart.amount}</p>
+            <i class="fas fa-chevron-down" data-id${cart.id}></i>
+        </div>
+    </div>
+        `;
+
+        cartContent.appendChild(div);
+        console.log(cartContent)
     }
 }
 // local Storage
