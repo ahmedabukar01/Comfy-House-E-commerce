@@ -83,6 +83,7 @@ class UI{
                     // display cart item
                     this.addToCart(cartItem);
                     // show the cart
+                    this.showCart();
                     })
             
         })
@@ -119,7 +120,10 @@ class UI{
         `;
 
         cartContent.appendChild(div);
-        console.log(cartContent)
+    }
+    showCart(){
+        cartDOM.classList.add('showCart');
+        cartOverlay.classList.add('transparentBcg');
     }
 }
 // local Storage
