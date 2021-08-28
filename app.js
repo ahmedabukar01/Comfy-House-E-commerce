@@ -140,6 +140,26 @@ class UI{
         cartDOM.classList.remove('showCart');
         cartOverlay.classList.remove('transparentBcg');
     }
+    cartLogic(){
+        clearCartBtn.addEventListener('click',()=>{
+            this.clearCart();
+        })
+    }
+    clearCart(){
+        let cartItems = cart.map(item=> item.id);
+        cartItems.forEach(item=>this.removeItem(item));
+
+        // cart Functionaliy
+    }
+    removeItem(id){
+        cart = cart.filter(item => item.id !== id);
+        this.saveCartValues(cart);
+        Storage.saveCart(cart);
+        let button = this.getSingleButton(id);
+    }
+    getSingleButton(id){
+        
+    }
 }
 // local Storage
 class Storage{
@@ -170,6 +190,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         Storage.saveProduct(products);
     }).then(()=>{
         ui.getbugButtons();
+        ui.cartLogic();
     })
     console.log('hey ahmed the code master welcome back we were waiting you long time man!')
 })
