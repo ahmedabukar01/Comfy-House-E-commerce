@@ -65,7 +65,7 @@ class UI{
             const inCart = cart.find(item => item.id === id);
             if(inCart){
                 button.innerText = 'in Cart';
-                button.target.disabled = true;
+                button.disabled = true;
             }
             
                 button.addEventListener('click',e=>{
