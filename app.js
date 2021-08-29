@@ -10,7 +10,7 @@ const productsDOM = document.querySelector('.products-center');
 
 // cart
 let cart = []
-let buttonsDom = [];
+let buttonsDOM = [];
 
 // getting the products
 
@@ -58,7 +58,7 @@ class UI{
     }
     getbugButtons(){
         const buttons = [...document.querySelectorAll('.bag-btn')];
-        buttonsDom = buttons;
+        buttonsDOM = buttons;
 
         buttons.forEach(button=>{
             let id = button.dataset.id;
@@ -148,7 +148,10 @@ class UI{
     clearCart(){
         let cartItems = cart.map(item=> item.id);
         cartItems.forEach(item=>this.removeItem(item));
-
+        while(cartContent.children.length>0){
+            cartContent.removeChild(cartContent.children[0]);
+        }
+        this.hideCart();
         // cart Functionaliy
     }
     removeItem(id){
@@ -156,11 +159,13 @@ class UI{
         this.saveCartValues(cart);
         Storage.saveCart(cart);
         let button = this.getSingleButton(id);
+        button.disabled = false;
+        button.innerHTML = `<i class="fas fa-shopping-cart"><i>add to cart`;
     }
     getSingleButton(id){
-        
+        return buttonsDOM.find(button => button.dataset.id === id);
     }
-}
+} 
 // local Storage
 class Storage{
     static saveProduct(products){
