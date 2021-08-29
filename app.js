@@ -115,7 +115,7 @@ class UI{
         <div>
             <i class="fas fa-chevron-up" data-id=${cart.id}></i>
             <p class="item-amount">${cart.amount}</p>
-            <i class="fas fa-chevron-down" data-id${cart.id}></i>
+            <i class="fas fa-chevron-down" data-id=${cart.id}></i>
         </div>
     </div>
         `;
@@ -153,6 +153,31 @@ class UI{
                 this.removeItem(id);
                 cartContent.removeChild(removeItem.parentElement.parentElement);
 
+            }
+            else if(e.target.classList.contains('fa-chevron-up')){
+                let addAmount = e.target;
+                let id = addAmount.dataset.id;
+                let tempItem = cart.find(item => item.id === id);
+                tempItem.amount = tempItem.amount + 1;
+                Storage.saveCart(cart);
+                this.saveCartValues(cart);
+                addAmount.nextElementSibling.innerText = tempItem.amount;
+            }
+            else if(e.target.classList.contains('fa-chevron-down')){
+                let lowerAmount = e.target;
+                let id = lowerAmount.dataset.id;
+                let tempItem = cart.find(item => item.id === id);
+                tempItem.amount = tempItem.amount - 1;
+                
+                if(tempItem.amount > 0){
+                    Storage.saveCart(cart);
+                    this.saveCartValues(cart);
+                    lowerAmount.previousElementSibling.innerText = tempItem.amount;
+                }
+                else{
+                    cartContent.removeChild(lowerAmount.parentElement.parentElement)
+                    this.removeItem(id);
+                }
             }
         })
     }
